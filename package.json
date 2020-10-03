@@ -1,0 +1,19 @@
+{
+  "name": "DesignPatternProject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "DesignPattern.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "DesignPatternProject": "./DesignPattern.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "keypress": "^0.2.1"
+  }
+}
