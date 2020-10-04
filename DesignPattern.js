@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const fileArray = [];
 let fileSeen = 0;
 let index = 0;
@@ -88,6 +86,23 @@ const textParam = function(params)
 
     fileArray.push(new TextFile(filename, size, type, encrypted));
 }
+
+PhotoFile.prototype.getDescription = function ()
+{
+    return `Nom : ${this.filename} - Taille : ${this.size} - Type : ${this.type} - Nombre de pixels : ${this.pixelNumber} - Créé le : ${this.createdAt} - Vu ? : ${this.seen}`
+}
+VideoFile.prototype.getDescription = function ()
+{
+    return `Nom : ${this.filename} - Taille : ${this.size} - Type : ${this.type} - Vidéo en HD ? : ${this.hd} - Créé le : ${this.createdAt} - Vu ? : ${this.seen}`
+}
+SongFile.prototype.getDescription = function ()
+{
+    return `Nom : ${this.filename} - Taille : ${this.size} - Type : ${this.type} - Musique convertie ? : ${this.converted} - Créé le : ${this.createdAt} - Vu ? : ${this.seen}`
+}
+TextFile.prototype.getDescription = function ()
+{
+    return `Nom : ${this.filename} - Taille : ${this.size} - Type : ${this.type} - Texte crypté ? : ${this.encrypted} - Créé le : ${this.createdAt} - Vu ? : ${this.seen}`
+}
 const keypress = require('keypress');
 
 
@@ -113,12 +128,12 @@ process.stdin.on('keypress', function (ch, key) {
 
 function ePressed()
 {
-    console.log(getFileSeen());
+    console.log("Nombre de fichiers vus : " + getFileSeen());
 }
 
 function cPressed()
 {
-    console.log(fileArray.length);
+    console.log("Nombre total de fichiers :" + fileArray.length);
 }
 
 function rightPressed()
@@ -126,10 +141,7 @@ function rightPressed()
     if (index < fileArray.length -1) index++;
     else index = 0;
     setSeenTrue(fileArray[index]);
-    if(fileArray[index].fileType === "photo") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].pixelNumber, fileArray[index].createdAt, fileArray[index].seen);
-    else if(fileArray[index].fileType === "song") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].converted, fileArray[index].createdAt, fileArray[index].seen);
-    else if(fileArray[index].fileType === "text") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].encrypted, fileArray[index].createdAt, fileArray[index].seen);
-    else if(fileArray[index].fileType === "video") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].hd, fileArray[index].createdAt, fileArray[index].seen);
+    console.log(fileArray[index].getDescription());
 }
 
 function leftPressed()
@@ -137,10 +149,7 @@ function leftPressed()
     if (index > 0) index--;
     else index = fileArray.length -1;
     setSeenTrue(fileArray[index]);
-    if(fileArray[index].fileType === "photo") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].pixelNumber, fileArray[index].createdAt, fileArray[index].seen);
-    else if(fileArray[index].fileType === "song") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].converted, fileArray[index].createdAt, fileArray[index].seen);
-    else if(fileArray[index].fileType === "text") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].encrypted, fileArray[index].createdAt, fileArray[index].seen);
-    else if(fileArray[index].fileType === "video") console.log(fileArray[index].filename, fileArray[index].size, fileArray[index].type, fileArray[index].hd, fileArray[index].createdAt, fileArray[index].seen);
+    console.log(fileArray[index].getDescription());
 }
 
 function setSeenTrue(file)
